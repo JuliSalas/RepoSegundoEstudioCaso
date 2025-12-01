@@ -12,9 +12,9 @@ package src;
         return raiz == null;
     }
 
-    // ====================================
-    //               BUSCAR
-    // ====================================
+    
+    //BUSCAR
+
     public NodoAVL buscar(int llaveBuscar) {
         if (estaVacio()) {
             System.out.println("El árbol está vacío.\n");
@@ -39,9 +39,8 @@ package src;
         return nodoTemp;
     }
 
-    // ====================================
-    //             INSERTAR
-    // ====================================
+
+    //INSERTAR
     public void insertar(int llave) {
         raiz = insertarNodo(raiz, llave);
     }
@@ -56,7 +55,7 @@ package src;
         } else if (llave > nodo.getLlave()) {
             nodo.setHijoDerecho(insertarNodo(nodo.getHijoDerecho(), llave));
         } else {
-            return nodo; // no insertar duplicados
+            return nodo;
         }
 
         // Actualizar altura
@@ -86,10 +85,10 @@ package src;
         return nodo;
     }
 
-    // ====================================
-    //             ELIMINAR
-    // ====================================
-    public void eliminar(int llave) {
+
+    //ELIMINAR
+
+        public void eliminar(int llave) {
         raiz = eliminarNodo(raiz, llave);
     }
 
@@ -123,29 +122,29 @@ package src;
             nodo.setHijoDerecho(eliminarNodo(nodo.getHijoDerecho(), sucesor.getLlave()));
         }
 
-        // Actualizar altura
+        //Actualizar altura
         nodo.setAltura(1 + Math.max(nodo.evaluarAltura(nodo.getHijoIzquierdo()),
                                     nodo.evaluarAltura(nodo.getHijoDerecho())));
 
         // Verificar balance y aplicar rotaciones
         int factor = nodo.evaluarFactorBalance(nodo);
 
-        // LL
+        
         if (factor > 1 && nodo.evaluarFactorBalance(nodo.getHijoIzquierdo()) >= 0) {
             return nodo.rotarDerecha(nodo);
         }
 
-        // LR
+        
         if (factor > 1 && nodo.evaluarFactorBalance(nodo.getHijoIzquierdo()) < 0) {
             return nodo.rotarIzquierdaDerecha(nodo);
         }
 
-        // RR
+        
         if (factor < -1 && nodo.evaluarFactorBalance(nodo.getHijoDerecho()) <= 0) {
             return nodo.rotarIzquierda(nodo);
         }
 
-        // RL
+ 
         if (factor < -1 && nodo.evaluarFactorBalance(nodo.getHijoDerecho()) > 0) {
             return nodo.rotarDerechaIzquierda(nodo);
         }
@@ -153,7 +152,7 @@ package src;
         return nodo;
     }
 
-    // Sucesor: el mínimo del subárbol derecho
+    //Sucesor: el mínimo del subárbol derecho
     private NodoAVL getSucesor(NodoAVL nodo) {
         NodoAVL actual = nodo.getHijoDerecho();
         while (actual.getHijoIzquierdo() != null) {
@@ -162,9 +161,9 @@ package src;
         return actual;
     }
 
-    // ====================================
-    //             INORDEN
-    // ====================================
+   
+    //En orden
+    
     public void inOrden() {
         inOrdenRec(raiz);
         System.out.println();
